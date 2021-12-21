@@ -1,20 +1,23 @@
 # A/B TESTING PROJCT
 
-# Case: Firm A introduced an alternative method for bidding which is called
-# average bidding for the previous method called maximum bidding.
-# Firm B wants to test the outcome of this alternative method by A/B test.
+# Case: Firm A introduced an alternative method for bidding which is called 
+# average bidding for the previous bidding method, which is called maximum bidding. 
+# A Client of the Firm A wants to test the efficiency of this alternative method 
+# with A/B test, whether average bidding brings greater reaction rates than 
+# maximum bidding or not.
 
-
+# Importing libraries
 import numpy as np
 import pandas as pd
-from scipy.stats import ttest_1samp, shapiro, levene, ttest_ind, \
-    mannwhitneyu, pearsonr, spearmanr, kendalltau, f_oneway, kruskal
+from scipy.stats import ttest_1samp, shapiro, levene, ttest_ind
 
+# Adjusting display options to observe better
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', 10)
 pd.set_option('display.float_format', lambda x: '%.5f' % x)
 
-df = pd.read_excel("datasets/ab_testing.xlsx", sheet_name = "Control Group")
+# Reading data sets
+cont_df = pd.read_excel("datasets/ab_testing.xlsx", sheet_name = "Control Group")
 test_df = pd.read_excel("datasets/ab_testing.xlsx", sheet_name = "Test Group")
 
 # Task1: Setting up the Hypothesis
@@ -24,11 +27,11 @@ test_df = pd.read_excel("datasets/ab_testing.xlsx", sheet_name = "Test Group")
 # H1: There is a difference between transformation rates,
 # of the average bidding and maximum bidding.
 
-df.head()
+cont__df.head()
 test_df.head()
 
 # Observing the average purchase
-df["Purchase"].mean() #550.8940587702316
+cont_df["Purchase"].mean() #550.8940587702316
 test_df["Purchase"].mean() #582.1060966484675
 
 # Hypothesis
@@ -56,7 +59,7 @@ print('Test Stat = %.4f, p-value = %.4f' % (test_stat, pvalue))
 
 # 2.Variance Homogeneity
 # H0: All input samples are from populations with equal variances
-# H1: They are not
+# H1:All input samples are not from populations with equal variances
 
 test_stat, pvalue = levene(df["Purchase"], test_df["Purchase"])
 print('Test Stat = %.4f, p-value = %.4f' % (test_stat, pvalue))
@@ -77,13 +80,3 @@ print('Test Stat = %.4f, p-value = %.4f' % (test_stat, pvalue))
 
 # Both of the samples have been normally distributed and they have equal variances
 # Proceeded with independent two sample t-test
-
-# Task 4: Recommendations for the customer
-# Average bidding and maximum bidding have identical means with 95% confidence level
-# However, average bidding lead to increase in average purchase.
-# Firm A can use average bidding or further analysis could be recommended.
-
-df["Earning"].mean()
-test_df["Earning"].mean()
-# Here it is clearly observed that average bidding increases Firm's earnings.
-# Recommendation: Keep average bidding method

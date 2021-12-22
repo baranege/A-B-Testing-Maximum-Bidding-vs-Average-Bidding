@@ -80,3 +80,12 @@ print('Test Stat = %.4f, p-value = %.4f' % (test_stat, pvalue))
 
 # Both of the samples have been normally distributed and they have equal variances
 # Proceeded with independent two sample t-test
+
+# Task 4: Recommendations for the customer
+
+# P-value is greater that 0.3493, so the observed two samples have
+# identical average values with 95% confidence level. This means that there is 
+# no statistically significant differnce between conversion rates of maximum bidding 
+# and average bidding. The reccommendation would be continuing with maximum bidding 
+# while perfoming further analysis until finding a differnt result.
+
